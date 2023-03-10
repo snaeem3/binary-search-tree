@@ -242,21 +242,40 @@ const Tree = (arr) => {
     }
 
     const depth = (node) => {
-        if (node === null) {
-            return 0;
-        }
-        let currentNode = root;
+        return depthRec(root, node.data);
         
-        if (currentNode.data === node.data) {
-            return 0;
-        } else if (findRec(currentNode.left, node.data) !== null) {
-            return 1 + depth(currentNode.left);
-        } else if (findRec(currentNode.right, node.data)!== null) {
-            return 1 + depth(currentNode.right);
-        } else {
-            return 0;
+        function depthRec (subtreeRoot, val) {
+            
+            if (subtreeRoot === null) {
+                return -1;
+            }
+            
+            let dist = -1;
+            if (subtreeRoot.data === val  || 
+                (dist = depthRec(subtreeRoot.left, val)) >= 0 || 
+                (dist = depthRec(subtreeRoot.right, val)) >= 0) {
+                    return dist + 1;
+            }
+            return dist;
         }
     }
+
+    const isBalanced = (node = root) => {
+        if (node === null) {
+            return true;
+        }
+
+        const heightLeft = height(node.left);
+        const heightRight = height(node.right);
+
+        return Math.abs(heightLeft - heightRight) <= 1 && isBalanced(node.left) && isBalanced(node.right);
+    }
+
+    const rebalance = () => {
+        arr = inorder();
+        buildTree();
+    }
+    
 
     const prettyPrint = (node = root, prefix = '', isLeft = true) => {
         if (node.right !== null) {
@@ -280,6 +299,8 @@ const Tree = (arr) => {
         postorder,
         height,
         depth,
+        isBalanced,
+        rebalance,
         prettyPrint
     };
 };

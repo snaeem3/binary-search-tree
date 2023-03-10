@@ -57,3 +57,31 @@ console.log(`Height of node right of root: ${tree.height(tree.getRoot().right)}`
 // Depth example
 console.log(`Depth of root: ${tree.depth(tree.getRoot())}`);
 console.log(`Depth of node right of root: ${tree.depth(tree.getRoot().right)}`);
+
+// isBalanced example
+console.log(`Is tree balanced? ${tree.isBalanced()}`);
+console.log('Adding 2 large values to tree');
+tree.insert(6346);
+tree.insert(6347);
+tree.prettyPrint();
+console.log(`Is tree balanced? ${tree.isBalanced()}`);
+
+
+// rebalance example
+tree.prettyPrint();
+console.log('Rebalancing tree');
+tree.rebalance();
+tree.prettyPrint();
+console.log(`Is tree balanced? ${tree.isBalanced()}`);
+
+// Inorder example
+console.log('Calling tree.inorder');
+console.log(tree.inorder());
+
+// Preorder example
+console.log('Calling tree.preorder');
+console.log(tree.preorder());
+
+// Postorder example
+console.log('Calling tree.postorder');
+console.log(tree.postorder());
